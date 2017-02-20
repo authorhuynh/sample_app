@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-	attr_accessor :remember_token, :activation_token
+	attr_accessor :remember_token, :activation_token, :activation_digest
   	before_save   :downcase_email
   	before_create :create_activation_digest
 	validates :name,  presence: true, length: { maximum: 50 }
@@ -51,7 +51,7 @@ class User < ApplicationRecord
 	   UserMailer.account_activation(self).deliver_now
 	end
 
-	private
+	# private
 
 	    # Converts email to all lower-case.
 	    def downcase_email
